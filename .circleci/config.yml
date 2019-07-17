@@ -13,11 +13,11 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run lint
-       - run:
-          name: 'Chrome version'
-          command: |
-            apt-cache policy google-chrome-stable
-            google-chrome --version
+      #  - run:
+      #     name: 'Chrome version'
+      #     command: |
+      #       apt-cache policy google-chrome-stable
+      #       google-chrome --version
       - run: npm run e2e
 
   
