@@ -6,7 +6,7 @@ import { createAccountAssertData, dynatraceTrailPageAssertData } from '../apptes
 import { browser } from 'protractor';
 import { CommonFunctions } from '../commons/common-functions';
 
-describe('Create Account and Region Selection Page Testsuite', () => {
+fdescribe('Create Account and Region Selection Page Testsuite', () => {
     let createAccount: CreateAccount;
     let accountDetails: AccountDetails;
     let regionDetails: RegionDetails;

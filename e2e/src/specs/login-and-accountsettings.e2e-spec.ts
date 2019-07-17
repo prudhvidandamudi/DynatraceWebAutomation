@@ -6,7 +6,7 @@ import { createAccountDetailsData, myProfilePageData } from '../apptestdata/test
 import { CommonFunctions } from '../commons/common-functions';
 import { browser } from 'protractor';
 
-fdescribe('My Profile Page Test Suite', () => {
+describe('My Profile Page Test Suite', () => {
     let homePage: HomePage;
     let login: Login;
     let deployDynatrace: DeployDynatrace;
