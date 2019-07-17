@@ -4,6 +4,28 @@
 # circle ci docker files
 # https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/node
 
+version: 2
+
+machine: 
+  services: 
+    - docker 
+
+#############################################################
+# Shared jobs and configuration
+#############################################################
+# enterprise_setup: &enterprise_setup  
+
+# attach_workspace_step: &attach_workspace_step
+#   attach_workspace:
+#     at: '.'
+
+# persist_workspace_step: &persist_workspace_step
+#   persist_to_workspace:
+#     root: '.'
+#     paths: [ '.' ]
+    
+
+
 #############################################################
 # Define workflows
 #############################################################
@@ -30,7 +52,13 @@ jobs:
       - image: circleci/node:8.10-browsers
     steps:
       - checkout
-      - run: npm install
+      - restore_cache:
+          key: afs-{{ checksum "package-lock.json" }}
+          paths: /home/circleci/node_modules
+      - run: npm install --no-progress
+      - save_cache:
+          key: afs-{{ checksum "package-lock.json" }} 
+          paths: /home/circleci/node_modules
 
   build:
     docker:
