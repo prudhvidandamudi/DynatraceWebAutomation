@@ -30,10 +30,7 @@ jobs:
       - image: circleci/node:8.10-browsers
     steps:
       - checkout
-      - restore_cache:
-          key: afs-{{ checksum "package-lock.json" }}
-          paths: /home/circleci/node_modules
-      - run: npm install --no-progress
+      - run: npm install
 
   build:
     docker:
