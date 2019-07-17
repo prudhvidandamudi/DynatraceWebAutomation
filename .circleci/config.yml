@@ -1,23 +1,72 @@
 # Javascript Node CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8-browsers
+# circle ci docker files
+# https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/node
 
+#############################################################
+# Define workflows
+#############################################################
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - install_dependencies 
+      - build:
+          requires: [install_dependencies]
+      - linting:
+          requires: [install_dependencies]    
+      - e2e_tests:
+          requires: [install_dependencies]    
+      - build:
+          requires: [install_dependencies]
+
+#############################################################
+# Define jobs
+#############################################################
+jobs:
+  install_dependencies:
+    docker:
+      - image: circleci/node:8.10-browsers
     steps:
       - checkout
-      - run: npm install
+      - restore_cache:
+          key: afs-{{ checksum "package-lock.json" }}
+          paths: /home/circleci/node_modules
+      - run: npm install --no-progress
+
+  build:
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout    
+      - run: npm run build
+
+  linting:
+    docker:
+      - image: circleci/node:8-browsers
+    steps:
+      - checkout    
       - run: npm run lint
-      #  - run:
-      #     name: 'Chrome version'
-      #     command: |
-      #       apt-cache policy google-chrome-stable
-      #       google-chrome --version
+
+  e2e_tests:
+    docker:
+      - image: circleci/node:8-browsers
+    steps:   
+      - checkout 
       - run: npm run e2e
+
+# version: 2
+# jobs:
+#   build:
+#     docker:
+#       # specify the version you desire here
+#       - image: circleci/node:8-browsers
+
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm run lint
+#       - run: npm run e2e
 
   
