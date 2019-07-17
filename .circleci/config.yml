@@ -36,12 +36,12 @@ workflows:
       - install_dependencies 
       - build:
           requires: [install_dependencies]
-      # - linting:
-      #     requires: [install_dependencies]    
-      # - e2e_tests:
-      #     requires: [install_dependencies]    
-      # - build:
-      #     requires: [install_dependencies]
+      - linting:
+          requires: [install_dependencies]    
+      - e2e_tests:
+          requires: [install_dependencies]    
+      - build:
+          requires: [install_dependencies]
 
 #############################################################
 # Define jobs
