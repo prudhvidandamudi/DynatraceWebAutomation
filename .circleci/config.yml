@@ -79,7 +79,7 @@ jobs:
 
   e2e_tests:
     docker:
-      - image: circleci/node:8.10-browsers
+      - image: circleci/node:8-browsers
     steps:   
       - checkout
       - *attach_workspace_step  
