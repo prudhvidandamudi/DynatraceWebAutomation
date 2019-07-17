@@ -53,11 +53,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: afs-{{ checksum "package-lock.json" }}
+          # key: afs-{{ checksum "package-lock.json" }}
           paths: /home/circleci/node_modules
       - run: npm install --no-progress
       - save_cache:
-          key: afs-{{ checksum "package-lock.json" }} 
+          # key: afs-{{ checksum "package-lock.json" }} 
           paths: /home/circleci/node_modules
       - *persist_workspace_step
 
@@ -73,14 +73,16 @@ jobs:
     docker:
       - image: circleci/node:8.10-browsers
     steps:
-      - checkout    
+      - checkout
+      - *attach_workspace_step     
       - run: npm run lint
 
   e2e_tests:
     docker:
       - image: circleci/node:8.10-browsers
     steps:   
-      - checkout 
+      - checkout
+      - *attach_workspace_step  
       - run: npm run e2e
 
 # version: 2
