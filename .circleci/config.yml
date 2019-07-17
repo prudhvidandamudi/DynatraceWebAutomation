@@ -13,16 +13,16 @@ machine:
 #############################################################
 # Shared jobs and configuration
 #############################################################
-# enterprise_setup: &enterprise_setup  
+enterprise_setup: &enterprise_setup  
 
-# attach_workspace_step: &attach_workspace_step
-#   attach_workspace:
-#     at: '.'
+attach_workspace_step: &attach_workspace_step
+  attach_workspace:
+    at: '.'
 
-# persist_workspace_step: &persist_workspace_step
-#   persist_to_workspace:
-#     root: '.'
-#     paths: [ '.' ]
+persist_workspace_step: &persist_workspace_step
+  persist_to_workspace:
+    root: '.'
+    paths: [ '.' ]
     
 
 
@@ -36,12 +36,12 @@ workflows:
       - install_dependencies 
       - build:
           requires: [install_dependencies]
-      - linting:
-          requires: [install_dependencies]    
-      - e2e_tests:
-          requires: [install_dependencies]    
-      - build:
-          requires: [install_dependencies]
+      # - linting:
+      #     requires: [install_dependencies]    
+      # - e2e_tests:
+      #     requires: [install_dependencies]    
+      # - build:
+      #     requires: [install_dependencies]
 
 #############################################################
 # Define jobs
@@ -59,12 +59,14 @@ jobs:
       - save_cache:
           key: afs-{{ checksum "package-lock.json" }} 
           paths: /home/circleci/node_modules
+      - *persist_workspace_step
 
   build:
     docker:
       - image: circleci/node:8.10-browsers
     steps:
-      - checkout    
+      - checkout  
+      - *attach_workspace_step  
       - run: npm run build
 
   linting:
