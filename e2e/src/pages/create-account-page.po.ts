@@ -8,7 +8,7 @@ export class CreateAccount {
     emailAddressTextBox: ElementFinder;
     passwordTextBox: ElementFinder;
     continueButton: ElementFinder;
-    confirmationCode = '446db920-0e01-4d1c-9ad0-39b37b7d00cd';
+    confirmationCode = '5f7e84e4-c69f-4a0d-bd0b-d0362d2f58ec';
 
     constructor() {
         this.commonFunctions = new CommonFunctions();
