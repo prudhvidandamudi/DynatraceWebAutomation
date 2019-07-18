@@ -29,7 +29,7 @@ fdescribe('Create Account and Region Selection Page Testsuite', () => {
 
     it('Entering a three digit password should disable continue button', async () => {
         createAccount.enterPassword(createAccountDetailsData.threeDigitPassword);
-        expect(createAccount.continueButton.getAttribute('disabled')).toEqual('false');
+        expect(createAccount.continueButton.getAttribute('disabled')).toEqual('true');
     });
 
     it('Entering a lowercase password should disable continue button', () => {
