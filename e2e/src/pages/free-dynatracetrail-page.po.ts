@@ -10,13 +10,15 @@ export class StartFreeTrail {
     messageElementStartFreeTrailClick: ElementFinder;
     hiddenCaptchaIframe: ElementFinder;
     visibleCaptchaIframe: ElementFinder;
+    acceptCookiesButton: ElementFinder;
 
     constructor() {
         this.commonFunctions = new CommonFunctions();
 
-        this.emaillAddressTextbox = element(by.name('email'));
+        this.emaillAddressTextbox = element(by.xpath('(//input[@name="email"])[1]'));
 
-        this.startFreeTrailButton = $('.btn--secondary');
+        this.startFreeTrailButton = element(by.xpath('(//input[@type="submit"])[1]'));
+        // $('.btn--secondary');
 
         this.messageElementStartFreeTrailClick = element(by.className('cta__message'));
 
@@ -25,14 +27,22 @@ export class StartFreeTrail {
 
         this.visibleCaptchaIframe = element(by.xpath
             ('//div[contains(@style, "visibility: hidden;")]//iframe[@title="recaptcha challenge"]'));
+
+        this.acceptCookiesButton = element(by.buttonText('Accept'));
     }
 
     enterEmailAddress(emailAddress: string) {
         this.commonFunctions.sendText(this.emaillAddressTextbox, emailAddress);
     }
 
+    clickAcceptButton() {
+        if (this.acceptCookiesButton.isDisplayed()) {
+            this.commonFunctions.click(this.acceptCookiesButton);
+        }
+    }
+
     clickStartFreeTrail() {
-        this.startFreeTrailButton.click();
+        this.commonFunctions.click(this.startFreeTrailButton);
     }
 
     messageAfterStartFreeTrailClick() {
