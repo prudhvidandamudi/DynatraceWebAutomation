@@ -9,6 +9,8 @@ export class Login {
     passwordTextBox: ElementFinder;
     nextButton: ElementFinder;
     loginButton: ElementFinder;
+    logoImage: ElementFinder;
+    invalidCredentialsErrorMessage: ElementFinder;
 
     constructor() {
 
@@ -18,6 +20,8 @@ export class Login {
         this.passwordTextBox = element(by.id('password_login'));
         this.nextButton = element(by.id('next_button'));
         this.loginButton = element(by.id('no_captcha_submit'));
+        this.logoImage = element(by.className('logo'));
+        this.invalidCredentialsErrorMessage = element(by.id('error_message_label'));
     }
 
     enterEmailId(value: string) {
@@ -34,5 +38,13 @@ export class Login {
 
     clickLoginButton() {
         this.commonFunctions.click(this.loginButton);
+    }
+
+    emailValidationMessage() {
+        return this.commonFunctions.getAttributeValue(this.emailTextBox, 'validationMessage');
+    }
+
+    getInvalidCredentialsText() {
+        return this.commonFunctions.getText(this.invalidCredentialsErrorMessage);
     }
 }

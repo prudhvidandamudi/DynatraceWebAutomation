@@ -7,13 +7,14 @@ exports.config = {
   allScriptsTimeout: 11000,
   specs: [
     './src/**/free-dynatracetrail-page.e2e-spec.ts',
-    './src/**/create-account.e2e-spec.ts',    
-    './src/**/login-and-accountsettings.e2e-spec.ts',
+    './src/**/create-account.e2e-spec.ts',
+    './src/**/login.e2e-spec.ts',
+    './src/**/accountsettings.e2e-spec.ts',
     './src/**/deploy-dynatrace.e2e-spec.ts'
   ],
   capabilities: {
     'browserName': 'chrome'
-    // maxInstances: 4,
+    // maxInstances: 5,
     // shardTestFiles: true
   },
   directConnect: true,
@@ -22,7 +23,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 60000,
-    print: function() {}
+    print: function () { }
   },
   onPrepare() {
     browser.driver.manage().window().maximize();

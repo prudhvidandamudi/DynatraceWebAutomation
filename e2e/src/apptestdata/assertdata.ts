@@ -3,7 +3,8 @@ export const dynatraceTrailPageAssertData = {
     missingAtSymbolMessage: 'Please include an \'@\' in the email address.',
     noDomainNameAfterAtSymbolMessage: 'Please enter a part following \'@\'.',
     invalidEmailAddressMessage: 'Please provide a valid email address.',
-    dynatraceUrl: 'https://www.dynatrace.com/trial/'
+    dynatraceUrl: 'https://www.dynatrace.com/trial/',
+    invalidCredentials: 'Invalid login credentials'
 };
 
 export const createAccountAssertData = {
